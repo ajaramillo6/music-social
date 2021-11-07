@@ -10,7 +10,8 @@ export default function Share() {
     const { user } = useContext(AuthContext);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
     const desc = useRef();
-    const [file, setFile] = useState(null);
+    const [file1, setFile1] = useState(null);
+    const [file2, setFile2] = useState(null);
 
     const submitHandler = async(e) => {
         e.preventDefault();
@@ -18,26 +19,35 @@ export default function Share() {
             userId: user._id,
             desc: desc.current.value,
         }
-        if(file){
-            const data = new FormData();
-            const fileName = Date.now() + file.name
-            data.append("name", fileName)
-            data.append("file", file)
-            newPost.img = fileName
-            console.log(newPost)
-            try {
-                await axios.post("/upload", data)
-            } catch(err) {
-                console.log(err);
+            if(file1){
+                const data = new FormData();
+                const fileName = Date.now() + file1.name
+                data.append("name", fileName)
+                data.append("file1", file1)
+                newPost.img = fileName
+                
+                if(file2){
+                    const data2 = new FormData();
+                    const fileName2 = Date.now() + file2.name
+                    data2.append("name", fileName2)
+                    data2.append("file2", file2)
+                    newPost.album = fileName2
+                
+                    try {
+                        await axios.post("/upload", data)
+                        await axios.post("/upload", data2)
+                    } catch(err) {
+                        console.log(err);
+                    }
+                    try {
+                        await axios.post("/posts", newPost);
+                        window.location.reload();
+                    } catch(err) {
+                        console.log(err)
+                    }
+                }
             }
-        try {
-            await axios.post("/posts", newPost);
-            window.location.reload();
-        } catch(err) {
-        console.log(err)
-        }
-    }
-};
+    };
 
     return (
         <div className="share">
@@ -53,29 +63,43 @@ export default function Share() {
                     <input placeholder={`What's on your mind ${user.username}?`} className="shareInput" ref={desc} />
                 </div>
                 <hr className="shareHr" />
-                {/* {file && (
+                {file2 && (
                     <div className="shareImgContainer">
-                        <audio src={URL.createObjectURL(file)} type="audio/mpeg" controls />
-                        <Cancel className="shareCancelImg" onClick={()=>setFile(null)} />
-                    </div>
-                )} */}
-                {file && (
-                    <div className="shareImgContainer">
-                        <img className="shareImg" src={URL.createObjectURL(file)} alt="" />
-                        <Cancel className="shareCancelImg" onClick={() => setFile(null)} />
+                        <img className="shareImg" src={URL.createObjectURL(file2)} alt="" />
+                        <Cancel className="shareCancelImg2" onClick={()=>setFile2(null)} />
                     </div>
                 )}
-                <form className="shareBottom" onSubmit={ submitHandler }>
+                {file1 && (
+                    <div className="shareImgContainer">
+                        <audio src={URL.createObjectURL(file1)} type="audio/mpeg" controls />
+                        <Cancel className="shareCancelImg1" onClick={()=>setFile1(null)} />
+                    </div>
+                )}
+                <form className="shareBottom" encType="multipart/form-data" onSubmit={ submitHandler }>
                     <div className="shareOptions">
-                        <label htmlFor="file" className="shareOption">
+                        <label htmlFor="file2" className="shareOption">
+                            <PermMedia htmlColor="tomato" className="shareIcon" />
+                            <span className="shareOptionText">Album cover</span>
+                            <input 
+                                style={{display:"none"}} 
+                                id = "file2"
+                                type="file"
+                                name="file2"
+                                accept=".jpeg, .jpg, .png" 
+                                onChange={(e)=> setFile2(e.target.files[0])} 
+                            />
+                        </label>
+                        <label htmlFor="file1" className="shareOption">
                             <LibraryMusicIcon htmlColor="yellow" className="shareIcon" />
                             <span className="shareOptionText">Song file</span>
                             <input 
                                 style={{display:"none"}} 
-                                type="file" id="file" 
-                                accept=".jpg, .jpeg, .png"
-                                // accept=".mp3" 
-                                onChange={(e)=> setFile(e.target.files[0])} 
+                                id = "file1"
+                                type="file"
+                                name="file1"
+                                accept=".mp3" 
+                                onChange={(e)=> setFile1(e.target.files[0])} 
+                                required
                             />
                         </label>
                     </div>

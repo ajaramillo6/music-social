@@ -1,6 +1,7 @@
 import './post.css';
 import {MoreVert} from '@material-ui/icons';
 import { useState, useEffect, useContext } from "react";
+import Song from '../song/Song';
 import axios from 'axios';
 import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
@@ -54,7 +55,7 @@ export default function Post({ post }) {
                 </div>
                 <div className="postCenter">
                     <span className="postText">{post?.desc}</span>
-                    <img className="postImg" src={PF+post.img} alt="" />
+                            <Song post={post} />
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
