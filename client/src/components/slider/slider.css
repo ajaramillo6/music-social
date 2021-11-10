@@ -16,6 +16,17 @@
 .range-slider::-webkit-slider-thumb {
   appearance: none;
   width: 14px;
+  margin-left: -5px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out;
+}
+
+.range-slider::-webkit-slider-thumb:hover {
+  appearance: none;
+  width: 14px;
   height: 14px;
   border-radius: 50%;
   background-color: #009fff;
@@ -24,6 +35,16 @@
 }
 
 .range-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border: 0;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out;
+}
+
+.range-slider::-moz-range-thumb:hover {
   width: 14px;
   height: 14px;
   border: 0;
@@ -64,6 +85,19 @@
   width: 90%;
   margin: auto;
   margin-top: 1%;
+  justify-content: left;
+  cursor: default;
+}
+
+.plays-count {
+  display: flex;
+  font-size: 16px;
+  color: #009fff;
+  text-align: center;
+  margin: auto;
+  width: 90%;
+  font-weight: 500;
+  justify-content: right;
 }
 
 .max-value {

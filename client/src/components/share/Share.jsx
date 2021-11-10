@@ -22,9 +22,12 @@ export default function Share() {
             if(file1){
                 const data = new FormData();
                 const fileName = Date.now() + file1.name
+                const fileTitle = file1.name
+                const fileTitle2 = fileTitle.split('.').slice(0,-1).join('.')
                 data.append("name", fileName)
                 data.append("file1", file1)
                 newPost.img = fileName
+                newPost.title = fileTitle2
                 
                 if(file2){
                     const data2 = new FormData();

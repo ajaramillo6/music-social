@@ -25,6 +25,7 @@
   "dependencies": {
     "howler": "^2.2.3",
     "jss": "^10.8.2",
+    "react-countup": "^6.1.0",
     "react-howler": "^5.2.0",
     "react-use-audio-player": "^1.2.4"
   }

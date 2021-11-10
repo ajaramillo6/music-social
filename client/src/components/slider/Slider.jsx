@@ -12,7 +12,8 @@ export default function Slider(props) {
         percentage,
         onChange,
         currentTime,
-        duration
+        duration,
+        plays
     } = props;
 
     useEffect(()=> {
@@ -78,8 +79,10 @@ export default function Slider(props) {
                 />
                 <div className="range-min-max-values">
                     <div className="min-value">{timeConverter(currentTime)}</div> 
-                   <div className="max-value">/ {timeConverter(duration)}</div>
-            </div>
+                    <div className="max-value">/ {timeConverter(duration)}</div>
+                    <div className="plays-count">{plays} plays</div>
+                </div>
+               
             </div>
         </div>
     )

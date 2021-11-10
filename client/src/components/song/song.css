@@ -1,8 +1,14 @@
+.control-panel {
+  display: flex;
+  justify-content: center;
+}
+
 .playBtn,
 .pauseBtn,
-.stopBtn {
+.volume-btn {
   cursor: pointer;
   color: white;
+  margin-left: 1.7%;
 }
 
 .song {
@@ -16,7 +22,8 @@
 
 .song-title {
   font-weight: 700;
-  margin-bottom: 10px;
+  font-size: 20px;
+  margin-bottom: 15px;
 }
 
 .postContainer {
