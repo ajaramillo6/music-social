@@ -80,6 +80,8 @@ export default function Slider(props) {
                 <div className="range-min-max-values">
                     <div className="min-value">{timeConverter(currentTime)}</div> 
                     <div className="max-value">/ {timeConverter(duration)}</div>
+                    <div className="min-value-mini">{timeConverter(currentTime)}</div> 
+                    <div className="max-value-mini">/{timeConverter(duration)}</div>
                     <div className="plays-count">{plays} plays</div>
                 </div>
                

@@ -6,6 +6,8 @@ import axios from 'axios';
 import { format } from 'timeago.js';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
+import Comments from '../comments/Comments';
+import ShareComments from '../shareComments/ShareComments';
 
 export default function Post({ post }) {
     
@@ -59,12 +61,24 @@ export default function Post({ post }) {
                 </div>
                 <div className="postBottom">
                     <div className="postBottomLeft">
-                        <img className="likeIcon" src={`${PF}like.png`} onClick={likeHandler} alt="" />
-                        <img className="likeIcon" src={`${PF}heart.png`} onClick={likeHandler} alt="" />
+                        {!isLiked ? 
+                        <img className="likeIcon" src={`${PF}empty_heart.png`} onClick={likeHandler} alt="" />:
+                        <img className="likeIcon" src={`${PF}full_heart.png`} onClick={likeHandler} alt="" />
+                        }
                         <span className="postLikeCounter">{like} friends like it</span>
                     </div>
                     <div className="postBottomRight">
                         <span className="postCommentText">{post.comment} comments</span>
+                    </div>
+                </div>
+                <div className='postCommentsContainer'>
+                    <div className='postCommentsTop'>
+                        <ShareComments user={user} />
+                    </div>
+                    <div className='postCommentsBottom'>
+                        <Comments user={user} />
+                        <Comments user={user} />
+                        <Comments user={user} />
                     </div>
                 </div>
             </div>

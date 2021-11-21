@@ -71,3 +71,12 @@
   border-bottom: 1px dashed gray;
   font-size: 15px;
 }
+
+.postCommentsTop {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+.postCommentsBottom {
+  padding-right: 10px;
+  padding-left: 10px;
+}

@@ -1,0 +1,30 @@
+.writeCommentContainer {
+  background-color: rgb(36, 40, 49);
+  width: 95%;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  margin-top: 10px;
+  margin-bottom: 1%;
+  border-radius: 10px;
+}
+
+.writeComment {
+  background-color: rgb(36, 40, 49);
+  width: 80%;
+  border: none;
+  color: white;
+  font-size: 14px;
+}
+
+.writeComment:focus {
+  outline: none;
+}
+
+.shareCommentProfileImg {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 5px;
+}

@@ -16,7 +16,6 @@
 .range-slider::-webkit-slider-thumb {
   appearance: none;
   width: 14px;
-  margin-left: -5px;
   height: 14px;
   border-radius: 50%;
   background-color: transparent;
@@ -79,7 +78,6 @@
 
 .range-min-max-values {
   display: flex;
-  font-size: 14px;
   color: #ffffff;
   text-align: center;
   width: 90%;
@@ -110,4 +108,36 @@
   margin-top: 0.5%;
   padding-right: 0.5%;
   font-size: 14px;
+}
+
+.max-value-mini {
+  display: none;
+}
+
+.min-value-mini {
+  display: none;
+}
+
+@media (max-width: 960px) {
+  .max-value {
+    display: none;
+  }
+
+  .min-value {
+    display: none;
+  }
+
+  .max-value-mini {
+    display: contents;
+    margin-top: 0.5%;
+    color: rgb(170, 170, 170);
+    font-size: 14px;
+  }
+
+  .min-value-mini {
+    display: contents;
+    margin-top: 0.5%;
+    padding-right: 0.5%;
+    font-size: 14px;
+  }
 }

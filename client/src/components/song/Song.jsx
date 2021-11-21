@@ -2,7 +2,6 @@ import './song.css';
 import {PlayArrow, Pause, VolumeUp, VolumeOff} from '@material-ui/icons';
 import { useState, useEffect, useRef } from "react";
 import Slider from '../slider/Slider';
-import { useCountUp } from 'react-countup';
 
 export default function Song({post}) {
 
@@ -12,18 +11,19 @@ export default function Song({post}) {
     const [percentage, setPercentage] = useState(0);
     const [duration, setDuration] = useState(0);
     const [currentTime, setCurrentTime] = useState(0);
+    const [clock, setClock] = useState(30);
+    const [status, setStatus] = useState(false)
 
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 
     const audioRef = useRef();
-    const countUpRef = useRef(null);
 
-    const { countUp, start, pauseResume } = useCountUp({
-        ref: countUpRef,
-        end: 30,
-        duration: 30,
-        startOnMount: false
-      });
+    useEffect(() => {
+        if (currentTime < 0.2){
+            setClock(30);
+        }
+    }, [clock, currentTime])
+
 
     const sound = () => {
         const audio = audioRef.current;
@@ -31,11 +31,11 @@ export default function Song({post}) {
         if(!isPlaying){
             setIsPlaying(true);
             audio.play();
-            start();
+            setStatus(true);
         } else {
             setIsPlaying(false);
             audio.pause();
-            pauseResume();
+            setStatus(false)
         }
     }
 
@@ -64,27 +64,19 @@ export default function Song({post}) {
         setCurrentTime(time.toFixed(2))
     }
 
-
-    const count = countUpRef.current;
-
     useEffect(()=> {
-        countPlays(count)
-    }, [count, plays])
-
-    const countPlays = (c) =>{
-        if(c > 5){
-            setPlays(plays + 1)
+        if (clock > 0 && status) {
+            setTimeout(() => setClock(clock - 1), 1000);
         }
-    }
+        if (clock === 1){
+            setPlays(plays+1);
+        }
+    }, [clock, status])
 
 
     return (
         <div className="postContainer">
             <img src={PF+post.album} className="postImg" />
-
-            <h1 ref={countUpRef}></h1>
-                {console.log(countUpRef.current)}
-
             <ul className='song'>
                 <li className="song-title">
                     <span>{post.title}</span>
